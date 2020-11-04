@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">UniGames</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="google_app_id">406703298744-506u7vdu2imbh8muemg7em1e4csm5e05.apps.googleusercontent.com</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_g_menu">GMenuActivity</string>
+    <string name="title_activity_app_menu">AppMenuActivity</string>
+    <string name="title_activity_werwer">werwerActivity</string>
+    <string name="title_activity_global_menu">GlobalMenu</string>
+    <string name="title_activity_main_menu">MainMenuActivity</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+</resources>

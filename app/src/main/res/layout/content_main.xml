@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:background="#000000">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:alpha="0.6"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/fundo_foreground" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:text="The Witcher 3"
+        android:textColor="#ffffff"
+        android:textSize="50dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wild Hunt"
+        android:layout_marginTop="260dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:textSize="30dp"/>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="310dp"
+        android:background="#C6C5C5"
+        android:textColor="#000000"
+        android:text="+ Saiba mais"
+        android:onClick="GameDetail"
+        android:tag="the-witcher-3-wild-hunt"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_marginTop="390dp"
+        android:paddingLeft="20dp"
+        android:id="@+id/layoutGamesDestaques"
+        android:background="@drawable/gradienthome"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/destaques"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Destaques"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:textSize="24dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reclyclerGamesDestaques"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="20dp"
+            >
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </LinearLayout>
+</RelativeLayout>
