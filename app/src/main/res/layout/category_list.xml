@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+    <data>
+        <variable name="category" type="com.games.mastergames.model.Category" android:id="@+id/varCategory"/>
+        <variable name="viewModel" type="com.games.mastergames.viewModels.CategoryViewModel" android:id="@+id/varModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/categoryDetail"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{category.name}"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="18sp"
+            android:onClick="CategoryDetail"
+            android:tag="@{category.id}"
+            android:background="#cfcfcf"/>
+    </LinearLayout>
+</layout>

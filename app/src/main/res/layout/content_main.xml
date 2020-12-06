@@ -5,6 +5,10 @@
     android:layout_centerHorizontal="true"
     android:background="#000000">
 
+    <include android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/drawer_toolbar"/>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

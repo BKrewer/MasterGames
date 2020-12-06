@@ -1,43 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/gameDetail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#302F2F"
-    tools:context=".GameDetail">
-
-    <ImageView
-        android:id="@+id/gameWallpaper"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:scaleType="centerCrop"
-        tools:srcCompat="@mipmap/ic_the_witcher" />
+    tools:context=".GameDetailActivity">
 
     <TextView
         android:id="@+id/gameName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The Witcher 3"
-        android:textSize="32dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="240dp"
-        android:textColor="#ffffff"
-        android:textStyle="bold" />
+        android:text="TextView"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="87dp" />
 
     <TextView
-        android:id="@+id/gameLongDescription"
+        android:id="@+id/gameDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="285dp"
-        android:justificationMode="inter_word"
-        android:textColor="#ffffff"
-        android:text="Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker." />
-
-</RelativeLayout>
+        android:text="TextView"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="136dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

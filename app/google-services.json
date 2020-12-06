@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "945987595747",
+    "firebase_url": "https://mastergamesv2-cd58a.firebaseio.com",
+    "project_id": "mastergamesv2-cd58a",
+    "storage_bucket": "mastergamesv2-cd58a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945987595747:android:008ac446cd7776f80644d6",
+        "android_client_info": {
+          "package_name": "com.games.mastergames"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945987595747-colpulbro7faon88fd59vs3658v67d18.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.games.mastergames",
+            "certificate_hash": "159574cd8955b92e0fd0a7b3b57c4e91c80bacbb"
+          }
+        },
+        {
+          "client_id": "945987595747-9m6au7j017c0jrkglrf910lq2fbu6dh3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEA6iln8Dp9bmZQWXdX8e5IQHNR0WvHYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945987595747-9m6au7j017c0jrkglrf910lq2fbu6dh3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
