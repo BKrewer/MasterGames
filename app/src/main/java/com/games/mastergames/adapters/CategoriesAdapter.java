@@ -24,11 +24,15 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         this.categoryViewModel = categoryViewModel;
     }
 
+    public void setCategoryList(List<Category> categories) {
+        this.categoryList = categories;
+    }
+
     @NonNull
     @Override
     public CategoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater  = LayoutInflater.from(parent.getContext());
-        CategoryListBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.category_list, parent, false);
+        final CategoryListBinding binding = CategoryListBinding.inflate(layoutInflater, parent, false);
         return new CategoriesViewHolder(binding);
     }
 

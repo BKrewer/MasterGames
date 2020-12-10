@@ -22,9 +22,6 @@ public class GameDetailActivity extends AppCompatActivity implements Observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_detail);
 
-        mGame = Game.getInstance();
-        mGame.addObserver(this);
-
         Bundle bundle = getIntent().getExtras();
         GameController gameController = new GameController();
         gameController.getGameById(bundle.getString("GAME_ID"));

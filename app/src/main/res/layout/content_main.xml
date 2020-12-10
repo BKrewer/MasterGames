@@ -64,7 +64,7 @@
             android:id="@+id/destaques"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Destaques"
+            android:text="Action Games"
             android:layout_centerHorizontal="true"
             android:textColor="#ffffff"
             android:textSize="24dp"/>

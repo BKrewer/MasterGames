@@ -8,10 +8,14 @@ import com.games.mastergames.controller.interfaces.IController;
 import com.games.mastergames.model.Category;
 import com.games.mastergames.model.Game;
 import com.games.mastergames.util.AppContextGame;
+import com.games.mastergames.viewModels.GameViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameController implements IController {
 
@@ -50,10 +54,10 @@ public class GameController implements IController {
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Game game = Game.getInstance();
+                        List<Game> gameList = new ArrayList<>();
                         try {
                             JSONObject games = response.getJSONObject("results");
-                            game.setGame(games.getInt("id"), games.getString("name"), games.getString("description"), games.getString("background_image"));
+                            gameList.add(new Game(games.getInt("id"), games.getString("name"), games.getString("description"), games.getString("background_image")));
                         } catch (JSONException ex) {}
                     }
                 }, new Response.ErrorListener() {
@@ -65,7 +69,7 @@ public class GameController implements IController {
     }
 
     @Override
-    public void getGamesByCategory(String categoryName) {
+    public void getGamesByCategory(String categoryName, GameViewModel gameViewModel) {
         AppContextGame.requestQueue.start();
         String url = AppContextGame.URLAPI + "games?genres=" + categoryName;
 
@@ -73,14 +77,13 @@ public class GameController implements IController {
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Game game = Game.getInstance();
+                        List<Game> gameList = new ArrayList<>();
                         try {
-                            JSONArray games = response.getJSONArray("results");
-                            for (int i = 0; i < games.length(); i++) {
-                                game.setGame(games.getJSONObject(i).getInt("id"), games.getJSONObject(i).getString("name"), games.getJSONObject(i).getString("description"), games.getJSONObject(i).getString("background_image"));
-                            }
+                            JSONObject games = response.getJSONObject("results");
+                            gameList.add(new Game(games.getInt("id"), games.getString("name"), games.getString("description"), games.getString("background_image")));
                         } catch (JSONException ex) {
                         }
+                        gameViewModel.setGames(gameList);
                     }
                 }, new Response.ErrorListener() {
                     @Override

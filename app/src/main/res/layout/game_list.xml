@@ -5,8 +5,8 @@
 
     >
     <data>
-        <variable name="category" type="com.games.mastergames.model.Category" android:id="@+id/varCategory"/>
-        <variable name="viewModel" type="com.games.mastergames.viewModels.CategoryViewModel" android:id="@+id/varModel"/>
+        <variable name="game" type="com.games.mastergames.model.Game" android:id="@+id/varGame"/>
+        <variable name="viewModel" type="com.games.mastergames.viewModels.GameViewModel" android:id="@+id/varModel"/>
     </data>
 
     <LinearLayout
@@ -15,14 +15,14 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/categoryDetail"
+            android:id="@+id/gameDetail"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#cfcfcf"
             android:onClick="CategoryDetail"
-            android:tag="@{category.id}"
-            android:text="@{category.name}"
+            android:tag="@{game.id}"
+            android:text="@{game.name}"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textColorLink="#000000"

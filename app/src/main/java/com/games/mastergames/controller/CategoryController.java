@@ -1,5 +1,7 @@
 package com.games.mastergames.controller;
 
+import android.app.Application;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -17,7 +19,7 @@ import java.util.List;
 
 public class CategoryController {
 
-    public void getCategories() {
+    public void getCategories(CategoryViewModel categoryViewModel) {
         AppContextGame.requestQueue.start();
         String url = AppContextGame.URLAPI + "genres";
 
@@ -33,7 +35,6 @@ public class CategoryController {
                             }
                         } catch (JSONException ex) {
                         }
-                        CategoryViewModel categoryViewModel = new CategoryViewModel();
                         categoryViewModel.setCategories(categoryList);
                     }
                 }, new Response.ErrorListener() {
