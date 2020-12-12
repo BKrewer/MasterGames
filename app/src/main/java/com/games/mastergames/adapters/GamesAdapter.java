@@ -2,11 +2,13 @@ package com.games.mastergames.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
 import com.games.mastergames.databinding.GameListBinding;
 import com.games.mastergames.model.Game;
 import com.games.mastergames.viewModels.GameViewModel;

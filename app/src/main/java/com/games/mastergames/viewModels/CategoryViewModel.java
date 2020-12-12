@@ -1,9 +1,5 @@
 package com.games.mastergames.viewModels;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -19,6 +15,7 @@ public class CategoryViewModel extends ViewModel {
     }
 
     public void setCategories(List categories) {
+
         this.categoryList.setValue(categories);
     }
 }

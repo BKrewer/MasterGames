@@ -19,6 +19,12 @@ import java.util.List;
 
 public class GameController implements IController {
 
+    private GameViewModel gameViewModel;
+
+    public GameController(GameViewModel gameViewModel) {
+        this.gameViewModel = gameViewModel;
+    }
+
     @Override
     public void getGameList() {
         AppContextGame.requestQueue.start();
@@ -48,7 +54,7 @@ public class GameController implements IController {
     @Override
     public void getGameById(String id) {
         AppContextGame.requestQueue.start();
-        String url = AppContextGame.URLAPI + "games?genres=" + id;
+        String url = AppContextGame.URLAPI + "games/" + id;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -56,9 +62,12 @@ public class GameController implements IController {
                     public void onResponse(JSONObject response) {
                         List<Game> gameList = new ArrayList<>();
                         try {
-                            JSONObject games = response.getJSONObject("results");
+                            JSONObject games = response;
                             gameList.add(new Game(games.getInt("id"), games.getString("name"), games.getString("description"), games.getString("background_image")));
-                        } catch (JSONException ex) {}
+
+                        } catch (JSONException ex) {
+                        }
+                        gameViewModel.setGameDetail(gameList);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -69,9 +78,9 @@ public class GameController implements IController {
     }
 
     @Override
-    public void getGamesByCategory(String categoryName, GameViewModel gameViewModel) {
+    public void getGamesByCategory(String categoryId) {
         AppContextGame.requestQueue.start();
-        String url = AppContextGame.URLAPI + "games?genres=" + categoryName;
+        String url = AppContextGame.URLAPI + "games?genres=" + categoryId;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -79,8 +88,10 @@ public class GameController implements IController {
                     public void onResponse(JSONObject response) {
                         List<Game> gameList = new ArrayList<>();
                         try {
-                            JSONObject games = response.getJSONObject("results");
-                            gameList.add(new Game(games.getInt("id"), games.getString("name"), games.getString("description"), games.getString("background_image")));
+                            JSONArray games = response.getJSONArray("results");
+                            for (int i = 0; i < games.length(); i++) {
+                                gameList.add(new Game(games.getJSONObject(i).getInt("id"), games.getJSONObject(i).getString("name"), games.getJSONObject(i).getString("background_image")));
+                            }
                         } catch (JSONException ex) {
                         }
                         gameViewModel.setGames(gameList);

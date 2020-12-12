@@ -44,8 +44,6 @@ public class HomeActivity extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navigationView;
     GoogleSignInClient mGoogleSignInClient;
-    private Category mCategory;
-    private Game mGame;
     private CategoriesAdapter adapter;
     private GamesAdapter adapterGames;
 
@@ -60,10 +58,15 @@ public class HomeActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        CategoryController categoryController = new CategoryController();
-        categoryController.getCategories(categoryViewModel);
-        GameController gameController = new GameController();
-        gameController.getGamesByCategory("action", gameViewModel);
+        List<Category> categoryList = new ArrayList<>();
+        adapter = new CategoriesAdapter(categoryList, categoryViewModel);
+        List<Game> gameList = new ArrayList<>();
+        adapterGames = new GamesAdapter(gameList, gameViewModel);
+
+        CategoryController categoryController = new CategoryController(categoryViewModel);
+        categoryController.getCategories();
+        GameController gameController = new GameController(gameViewModel);
+        //gameController.getGamesByCategory("action");
 
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navigationView);
@@ -97,8 +100,6 @@ public class HomeActivity extends AppCompatActivity {
         recyclerGames.setHasFixedSize(true);
         recyclerGames.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Category> categoryList = new ArrayList<>();
-        adapter = new CategoriesAdapter(categoryList, categoryViewModel);
         categoryViewModel.getCategories().observe(this, new Observer<List<Category>>() {
             @Override
             public void onChanged(List<Category> categories) {
@@ -108,8 +109,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        List<Game> gameList = new ArrayList<>();
-        adapterGames = new GamesAdapter(gameList, gameViewModel);
         gameViewModel.getGames().observe(this, new Observer<List<Game>>() {
             @Override
             public void onChanged(List<Game> games) {

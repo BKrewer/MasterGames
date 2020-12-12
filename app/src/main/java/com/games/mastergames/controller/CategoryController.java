@@ -19,7 +19,13 @@ import java.util.List;
 
 public class CategoryController {
 
-    public void getCategories(CategoryViewModel categoryViewModel) {
+    private CategoryViewModel categoryViewModel;
+
+    public CategoryController(CategoryViewModel categoryViewModel) {
+        this.categoryViewModel = categoryViewModel;
+    }
+
+    public void getCategories() {
         AppContextGame.requestQueue.start();
         String url = AppContextGame.URLAPI + "genres";
 
@@ -47,7 +53,7 @@ public class CategoryController {
 
     public void getCategoryDetail(int id) {
         AppContextGame.requestQueue.start();
-        String url = AppContextGame.URLAPI + "genres/" + id;
+        String url = AppContextGame.URLAPI + "genres=" + id;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

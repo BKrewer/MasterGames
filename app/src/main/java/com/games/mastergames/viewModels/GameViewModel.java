@@ -18,4 +18,15 @@ public class GameViewModel extends ViewModel {
     public void setGames(List games) {
         this.gameList.setValue(games);
     }
+
+    private MutableLiveData<List<Game>> gameDetail = new MutableLiveData<>();
+
+    public MutableLiveData<List<Game>> getGameDetail() {
+        return gameDetail;
+    }
+
+    public void setGameDetail(List games) {
+        this.gameDetail.setValue(games);
+    }
+
 }

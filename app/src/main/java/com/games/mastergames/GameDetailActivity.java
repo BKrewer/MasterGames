@@ -1,19 +1,23 @@
 package com.games.mastergames;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
+import com.games.mastergames.adapters.GamesAdapter;
 import com.games.mastergames.controller.GameController;
-import com.games.mastergames.model.Category;
 import com.games.mastergames.model.Game;
+import com.games.mastergames.viewModels.GameViewModel;
 
-import java.util.Observable;
-import java.util.Observer;
+import java.util.List;
 
-public class GameDetailActivity extends AppCompatActivity implements Observer {
-    private Game mGame;
+
+public class GameDetailActivity extends AppCompatActivity {
     TextView gameName;
     TextView gameDescription;
 
@@ -22,18 +26,21 @@ public class GameDetailActivity extends AppCompatActivity implements Observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_detail);
 
+        GameViewModel gameViewModel = new ViewModelProvider(this).get(GameViewModel.class);
         Bundle bundle = getIntent().getExtras();
-        GameController gameController = new GameController();
+        GameController gameController = new GameController(gameViewModel);
         gameController.getGameById(bundle.getString("GAME_ID"));
 
 
         gameName = findViewById(R.id.gameName);
         gameDescription = findViewById(R.id.gameDescription);
-    }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        gameName.setText(mGame.getName());
-        gameDescription.setText(mGame.getDescription());
+        gameViewModel.getGameDetail().observe(this, new Observer<List<Game>>() {
+            @Override
+            public void onChanged(List<Game> games) {
+                gameName.setText(games.get(0).getName());
+                gameDescription.setText(games.get(0).getDescription());
+            }
+        });
     }
 }

@@ -10,6 +10,12 @@ public class Game {
     private String description;
     private String imageBackground;
 
+    public Game(int id, String name, String imageBackground) {
+        this.id = id;
+        this.name = name;
+        this.imageBackground = imageBackground;
+    }
+
     public Game(int id, String name, String description, String imageBackground) {
         this.id = id;
         this.name = name;
