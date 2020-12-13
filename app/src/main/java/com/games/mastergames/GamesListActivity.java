@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.games.mastergames.adapters.GamesAdapter;
+import com.games.mastergames.adapters.GamesListAdapter;
 import com.games.mastergames.controller.GameController;
 import com.games.mastergames.model.Game;
 import com.games.mastergames.viewModels.GameViewModel;
@@ -20,7 +22,8 @@ import java.util.List;
 
 public class GamesListActivity extends AppCompatActivity {
 
-    private GamesAdapter adapterGames;
+    private GamesListAdapter adapterGames;
+    TextView gameName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,7 @@ public class GamesListActivity extends AppCompatActivity {
         gameController.getGamesByCategory(bundle.getString("CATEGORY_ID"));
 
         List<Game> gameList = new ArrayList<>();
-        adapterGames = new GamesAdapter(gameList, gameViewModel);
+        adapterGames = new GamesListAdapter(getApplicationContext(), gameList, gameViewModel);
 
         RecyclerView recyclerGames = findViewById(R.id.reclyclerGamesList);
         recyclerGames.setHasFixedSize(true);

@@ -63,7 +63,8 @@ public class GameController implements IController {
                         List<Game> gameList = new ArrayList<>();
                         try {
                             JSONObject games = response;
-                            gameList.add(new Game(games.getInt("id"), games.getString("name"), games.getString("description"), games.getString("background_image")));
+                            JSONArray developers = response.getJSONArray("developers");
+                            gameList.add(new Game(games.getInt("id"), games.getString("name"), games.getString("description"), games.getString("background_image"), developers.getJSONObject(0).getString("name")));
 
                         } catch (JSONException ex) {
                         }

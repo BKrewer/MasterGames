@@ -12,20 +12,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:onClick="GameDetail"
+        android:tag="@{game.id}">
 
-        <Button
+        <ImageView
+            android:id="@+id/imageItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:maxHeight="240dp"/>
+
+        <TextView
             android:id="@+id/gameDetail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#cfcfcf"
-            android:onClick="GameDetail"
-            android:tag="@{game.id}"
+            android:layout_below="@id/imageItem"
+            android:layout_marginTop="-50dp"
+            android:background="#2000"
             android:text="@{game.name}"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textColorLink="#000000"
+            android:paddingLeft="10dp"
+            android:textColor="#ffffff"
+            android:textColorLink="#ffffff"
             android:textSize="18sp" />
-
     </RelativeLayout>
 </layout>
