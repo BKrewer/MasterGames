@@ -4,10 +4,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.games.mastergames.R;
 import com.games.mastergames.databinding.CategoryListBinding;
 import com.games.mastergames.model.Category;
 import com.games.mastergames.viewModels.CategoryViewModel;

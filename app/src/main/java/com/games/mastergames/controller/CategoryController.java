@@ -51,9 +51,9 @@ public class CategoryController {
             AppContextGame.requestQueue.add(jsonObjectRequest);
     }
 
-    public void getCategoryDetail(int id) {
+    public void getCategoryDetail(String name) {
         AppContextGame.requestQueue.start();
-        String url = AppContextGame.URLAPI + "genres=" + id;
+        String url = AppContextGame.URLAPI + "genres=" + name;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

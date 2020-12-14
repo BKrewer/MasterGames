@@ -122,7 +122,7 @@ public class HomeActivity extends AppCompatActivity {
     public void CategoryDetail(View view) {
         String value =  String.valueOf(view.getTag());
         Intent it = new Intent(HomeActivity.this, GamesListActivity.class);
-        it.putExtra("CATEGORY_ID", value);
+        it.putExtra("CATEGORY_NAME", value);
         startActivity(it);
     }
 

@@ -73,4 +73,11 @@ public class MainActivity extends AppCompatActivity {
         Intent it = new Intent(MainActivity.this, HomeActivity.class);
         startActivity(it);
     }
+
+    public void GameDetail(View view) {
+        String value =  String.valueOf(view.getTag());
+        Intent it = new Intent(MainActivity.this, GameDetailActivity.class);
+        it.putExtra("GAME_ID", value);
+        startActivity(it);
+    }
 }

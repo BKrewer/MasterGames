@@ -39,6 +39,20 @@
             android:textColor="#000000"
             android:textSize="18sp"/>
 
+        <Button
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="20dp"
+            android:background="?attr/actionModeShareDrawable"
+            android:onClick="shareGameLink" />
+
+<!--        <Button-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:text="share"-->
+<!--            android:onClick="onShareItem">-->
+<!--        </Button>-->
+
         <TextView
             android:id="@+id/gameDescription"
             android:layout_width="match_parent"
@@ -49,5 +63,24 @@
             android:textColor="#000000"
             android:justificationMode="inter_word"
             android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/listGamesDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="teste"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:textSize="22sp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reclyclerGamesListDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </ScrollView>

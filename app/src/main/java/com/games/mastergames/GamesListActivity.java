@@ -23,7 +23,8 @@ import java.util.List;
 public class GamesListActivity extends AppCompatActivity {
 
     private GamesListAdapter adapterGames;
-    TextView gameName;
+    TextView categoryTitle;
+    String categoryName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +33,14 @@ public class GamesListActivity extends AppCompatActivity {
 
         GameViewModel gameViewModel = new ViewModelProvider(this).get(GameViewModel.class);
         Bundle bundle = getIntent().getExtras();
+        categoryName = bundle.getString("CATEGORY_NAME");
+
+        categoryTitle = findViewById(R.id.titleCategory);
+        categoryTitle.setText(categoryName + " Games");
 
         GameController gameController = new GameController(gameViewModel);
-        gameController.getGamesByCategory(bundle.getString("CATEGORY_ID"));
+        gameController.getGamesByCategory(categoryName);
+
 
         List<Game> gameList = new ArrayList<>();
         adapterGames = new GamesListAdapter(getApplicationContext(), gameList, gameViewModel);
@@ -57,6 +63,7 @@ public class GamesListActivity extends AppCompatActivity {
         String value =  String.valueOf(view.getTag());
         Intent it = new Intent(GamesListActivity.this, GameDetailActivity.class);
         it.putExtra("GAME_ID", value);
+        it.putExtra("CATEGORY_NAME", categoryName);
         startActivity(it);
     }
 }

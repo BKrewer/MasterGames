@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:background="#cfcfcf"
             android:onClick="CategoryDetail"
-            android:tag="@{category.id}"
+            android:tag="@{category.name}"
             android:text="@{category.name}"
             android:textAlignment="center"
             android:textColor="#000000"

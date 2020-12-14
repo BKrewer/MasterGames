@@ -79,9 +79,9 @@ public class GameController implements IController {
     }
 
     @Override
-    public void getGamesByCategory(String categoryId) {
+    public void getGamesByCategory(String categoryName) {
         AppContextGame.requestQueue.start();
-        String url = AppContextGame.URLAPI + "games?genres=" + categoryId;
+        String url = AppContextGame.URLAPI + "games?genres=" + categoryName.toLowerCase();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

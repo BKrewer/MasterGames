@@ -1,23 +1,27 @@
 package com.games.mastergames.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.games.mastergames.databinding.GameListBinding;
 import com.games.mastergames.model.Game;
 import com.games.mastergames.viewModels.GameViewModel;
 
 import java.util.List;
 
-public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHolder> {
+public class GamesDetailAdapter extends RecyclerView.Adapter<GamesDetailAdapter.GamesViewHolder> {
 
     private List<Game> gamesList;
     private GameViewModel gameViewModel;
+    Context context;
 
-    public GamesAdapter(List<Game> gamesList, GameViewModel gameViewModel) {
+    public GamesDetailAdapter(Context context, List<Game> gamesList, GameViewModel gameViewModel) {
+        this.context = context;
         this.gamesList = gamesList;
         this.gameViewModel = gameViewModel;
     }
@@ -55,6 +59,10 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.GamesViewHol
 
         void setBinding(Game game, GameViewModel viewModel) {
             binding.setGame(game);
+            Glide.with(context).asBitmap()
+                    .load(game.getImageBackground())
+                    .thumbnail(0.5f)
+                    .into(binding.imageItem);
             binding.setViewModel(viewModel);
             binding.executePendingBindings();
         }
