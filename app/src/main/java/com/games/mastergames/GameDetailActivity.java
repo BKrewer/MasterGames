@@ -24,6 +24,8 @@ import com.games.mastergames.adapters.GamesListAdapter;
 import com.games.mastergames.controller.GameController;
 import com.games.mastergames.model.Game;
 import com.games.mastergames.viewModels.GameViewModel;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,6 +41,8 @@ public class GameDetailActivity extends AppCompatActivity {
     TextView listGamesDetail;
     ImageView gameBackground;
     private int gameId;
+    private String gameNameDB;
+    private String gameBackgroundDB;
     private GamesDetailAdapter adapterGames;
     String categoryName;
 
@@ -70,8 +74,10 @@ public class GameDetailActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Game> games) {
                 gameName.setText(games.get(0).getName());
+                gameNameDB = games.get(0).getName();
                 gameDev.setText(games.get(0).getDeveloper());
                 gameId = games.get(0).getId();
+                gameBackgroundDB = games.get(0).getImageBackground();
                 gameDescription.setText(android.text.Html.fromHtml(games.get(0).getDescription()).toString());
                 Glide.with(getApplicationContext()).load(String.valueOf(games.get(0).getImageBackground())).into(gameBackground);
             }
@@ -99,14 +105,13 @@ public class GameDetailActivity extends AppCompatActivity {
     public void shareGameLink(View view) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "http://app.mastergames.com/gameid=" + gameId);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "app.mastergames.com/gameid=" + gameId + "&" + categoryName);
         startActivity(Intent.createChooser(shareIntent, "Share link using"));
     }
 
-
     public void onShareItem(View v) {
-        ImageView ivImage = findViewById(R.id.gameBackground);
-        Uri bmpUri = getLocalBitmapUri(ivImage);
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+        Uri bmpUri = FileProvider.getUriForFile(GameDetailActivity.this, "com.games.mastergames.fileprovider", file);
         if (bmpUri != null) {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
@@ -117,43 +122,10 @@ public class GameDetailActivity extends AppCompatActivity {
         }
     }
 
-    public Uri getLocalBitmapUri(ImageView imageView) {
-        Drawable drawable = imageView.getDrawable();
-        Bitmap bmp = null;
-        if (drawable instanceof BitmapDrawable){
-            bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        } else {
-            return null;
-        }
-
-        Uri bmpUri = null;
-        try {
-            File file =  new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
-            FileOutputStream out = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
-            out.close();
-            bmpUri = Uri.fromFile(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bmpUri;
-    }
-
-    public Uri getBitmapFromDrawable(Bitmap bmp){
-
-        Uri bmpUri = null;
-        try {
-            File file =  new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
-            FileOutputStream out = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
-            out.close();
-
-            bmpUri = FileProvider.getUriForFile(GameDetailActivity.this, "com.games.mastergames", file);
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bmpUri;
+    public void addFavorite(View view) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Favorites");
+        DatabaseReference postsRef = myRef.child("games");
+        postsRef.child(String.valueOf(gameId)).setValue(new Game(gameId, gameNameDB, gameBackgroundDB));
     }
 }

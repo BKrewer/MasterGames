@@ -39,19 +39,36 @@
             android:textColor="#000000"
             android:textSize="18sp"/>
 
-        <Button
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginLeft="20dp"
-            android:background="?attr/actionModeShareDrawable"
-            android:onClick="shareGameLink" />
 
-<!--        <Button-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:text="share"-->
-<!--            android:onClick="onShareItem">-->
-<!--        </Button>-->
+            android:layout_marginRight="20dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Share Link"
+                android:onClick="shareGameLink" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:text="Share image"
+                android:onClick="onShareItem">
+            </Button>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:text="Add favotire"
+                android:onClick="addFavorite">
+            </Button>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/gameDescription"

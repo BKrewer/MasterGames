@@ -1,5 +1,12 @@
 package com.games.mastergames;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,16 +17,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.games.mastergames.adapters.CategoriesAdapter;
 import com.games.mastergames.adapters.GamesAdapter;
+import com.games.mastergames.adapters.GamesListAdapter;
 import com.games.mastergames.controller.CategoryController;
 import com.games.mastergames.controller.GameController;
 import com.games.mastergames.model.Category;
@@ -32,8 +32,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -45,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
     NavigationView navigationView;
     GoogleSignInClient mGoogleSignInClient;
     private CategoriesAdapter adapter;
-    private GamesAdapter adapterGames;
+    private GamesListAdapter adapterGames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +68,28 @@ public class HomeActivity extends AppCompatActivity {
 
         List<Category> categoryList = new ArrayList<>();
         adapter = new CategoriesAdapter(categoryList, categoryViewModel);
-        List<Game> gameList = new ArrayList<>();
-        adapterGames = new GamesAdapter(gameList, gameViewModel);
+        ArrayList<Game> listFavoritesGames = new ArrayList<>();
+        adapterGames = new GamesListAdapter(getApplicationContext(), listFavoritesGames, gameViewModel);
 
         CategoryController categoryController = new CategoryController(categoryViewModel);
         categoryController.getCategories();
-        GameController gameController = new GameController(gameViewModel);
-        //gameController.getGamesByCategory("action");
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Favorites").child("games");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listFavoritesGames.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Game game = snapshot.getValue(Game.class);
+                    listFavoritesGames.add(game);
+                }
+                gameViewModel.setFavoriteGames(listFavoritesGames);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navigationView);
@@ -98,7 +121,7 @@ public class HomeActivity extends AppCompatActivity {
         recycleCategories.setLayoutManager(new LinearLayoutManager(this));
         RecyclerView recyclerGames = findViewById(R.id.reclyclerGamesDestaques);
         recyclerGames.setHasFixedSize(true);
-        recyclerGames.setLayoutManager(new LinearLayoutManager(this));
+        recyclerGames.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         categoryViewModel.getCategories().observe(this, new Observer<List<Category>>() {
             @Override
@@ -109,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        gameViewModel.getGames().observe(this, new Observer<List<Game>>() {
+        gameViewModel.getFavoriteGames().observe(this, new Observer<List<Game>>() {
             @Override
             public void onChanged(List<Game> games) {
                 adapterGames.setGameList(games);

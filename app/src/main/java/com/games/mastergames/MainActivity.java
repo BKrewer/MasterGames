@@ -26,6 +26,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                handleSendText(intent); // Handle text being sent
+            }
+        }
+
         signin = findViewById(R.id.sign_in_button);
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,5 +89,17 @@ public class MainActivity extends AppCompatActivity {
         Intent it = new Intent(MainActivity.this, GameDetailActivity.class);
         it.putExtra("GAME_ID", value);
         startActivity(it);
+    }
+
+    public void handleSendText(Intent intent) {
+        String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if (sharedText != null) {
+            Intent it = new Intent(MainActivity.this, GameDetailActivity.class);
+            String gameId = sharedText.split("=")[1].split("&")[0];
+            String categoryId = sharedText.split("&")[1];
+            it.putExtra("GAME_ID", gameId);
+            it.putExtra("CATEGORY_NAME", categoryId);
+            startActivity(it);
+        }
     }
 }

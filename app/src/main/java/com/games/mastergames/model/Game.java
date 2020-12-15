@@ -7,6 +7,10 @@ public class Game {
     private String imageBackground;
     private String developer;
 
+    public Game() {
+        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
+    }
+
     public Game(int id, String name, String imageBackground) {
         this.id = id;
         this.name = name;

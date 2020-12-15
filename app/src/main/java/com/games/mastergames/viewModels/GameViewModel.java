@@ -29,4 +29,13 @@ public class GameViewModel extends ViewModel {
         this.gameDetail.setValue(games);
     }
 
+    private MutableLiveData<List<Game>> favoriteGames = new MutableLiveData<>();
+
+    public MutableLiveData<List<Game>> getFavoriteGames() {
+        return favoriteGames;
+    }
+
+    public void setFavoriteGames(List games) {
+        this.favoriteGames.setValue(games);
+    }
 }
