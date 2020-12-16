@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.games.mastergames.adapters.CategoriesAdapter;
 import com.games.mastergames.adapters.GamesAdapter;
 import com.games.mastergames.adapters.GamesListAdapter;
@@ -29,6 +31,7 @@ import com.games.mastergames.viewModels.GameViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -48,6 +51,8 @@ public class HomeActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     TextView userNameField;
+    TextView userEmail;
+    ImageView userImage;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     NavigationView navigationView;
@@ -94,26 +99,30 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navigationView);
 
+        View headerLayout =
+                navigationView.inflateHeaderView(R.layout.drawer_header);
+
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,  R.string.open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
 
         if(acct != null) {
             String personName = acct.getDisplayName();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
             String personEmail = acct.getEmail();
-            String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
 
-            //userNameField = findViewById(R.id.userName);
-            //userNameField.setText(personName);
-            //userImage = findViewById(R.id.userImage);
-            //userName.setText(personName);
-            //Glide.with(this).load(String.valueOf(personPhoto)).into(userImage);
+            userNameField = headerLayout.findViewById(R.id.userName);
+            userNameField.setText(personName);
+            userEmail = headerLayout.findViewById(R.id.userEmail);
+            userEmail.setText(personEmail);
         }
 
         RecyclerView recycleCategories = findViewById(R.id.recyclerCategories);
@@ -129,6 +138,8 @@ public class HomeActivity extends AppCompatActivity {
                 adapter.setCategoryList(categories);
                 recycleCategories.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+                TextView load = findViewById(R.id.categoryLoad);
+                load.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -153,17 +164,15 @@ public class HomeActivity extends AppCompatActivity {
         String value =  String.valueOf(view.getTag());
         Intent it = new Intent(HomeActivity.this, GameDetailActivity.class);
         it.putExtra("GAME_ID", value);
+        it.putExtra("CATEGORY_NAME", "Action");
         startActivity(it);
     }
 
     public void signOut(MenuItem item) {
         mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Intent it = new Intent(HomeActivity.this, MainActivity.class);
-                        startActivity(it);
-                    }
+                .addOnCompleteListener(this, task -> {
+                    Intent it = new Intent(HomeActivity.this, MainActivity.class);
+                    startActivity(it);
                 });
     }
 }

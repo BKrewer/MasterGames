@@ -9,9 +9,14 @@
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
-    <include android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        layout="@layout/content_main"/>
+        <include android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/content_main"/>
+
+        <include android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/drawer_toolbar"/>
+
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"
@@ -34,9 +39,21 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginTop="280dp"
+                android:layout_marginTop="210dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:text="CATEGORIAS"
+                android:textColor="#000000"
+                android:textColorLink="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/categoryLoad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Carregando..."
                 android:textColor="#000000"
                 android:textColorLink="#000000"
                 android:textSize="24sp"
@@ -45,8 +62,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerCategories"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="350dp"
                 >
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>

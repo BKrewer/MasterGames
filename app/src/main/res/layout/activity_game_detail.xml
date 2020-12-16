@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="#000000"
     tools:context=".GameDetailActivity">
 
     <LinearLayout
@@ -25,7 +26,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="20dp"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textSize="32sp"/>
 
         <TextView
@@ -36,7 +37,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textSize="18sp"/>
 
         <LinearLayout
@@ -44,18 +45,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginLeft="20dp"
-
             android:layout_marginRight="20dp">
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:text="Share Link"
                 android:onClick="shareGameLink" />
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:text="Share image"
                 android:onClick="onShareItem">
@@ -63,7 +63,7 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:text="Add favotire"
                 android:onClick="addFavorite">
@@ -74,10 +74,10 @@
             android:id="@+id/gameDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:justificationMode="inter_word"
             android:textSize="22sp" />
 
@@ -86,8 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="teste"
             android:textStyle="bold"
+            android:textColor="#ffffff"
             android:layout_marginLeft="20dp"
             android:textSize="22sp"/>
 

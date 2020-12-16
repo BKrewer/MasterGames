@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,6 +18,7 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.games.mastergames.adapters.GamesDetailAdapter;
@@ -127,5 +129,11 @@ public class GameDetailActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("Favorites");
         DatabaseReference postsRef = myRef.child("games");
         postsRef.child(String.valueOf(gameId)).setValue(new Game(gameId, gameNameDB, gameBackgroundDB));
+        Context context = getApplicationContext();
+        CharSequence text = "O jogo " + gameNameDB + " foi adicionado aos favoritos!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 }
