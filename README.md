@@ -1,6 +1,6 @@
 # MasterGames
 
-Aplicativo desenvolvido para a disciplina de desenvolvimento móvel cursada em 2020/02.
+Aplicativo de listagem de filmes
 
 - Java para android
 - Autenticação utilizando login do google
